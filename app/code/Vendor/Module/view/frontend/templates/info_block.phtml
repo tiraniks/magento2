@@ -1,0 +1,22 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$connection = $objectManager->get(\Magento\Framework\App\ResourceConnection::class)->getConnection();
+$select = $connection->select()->from(['info' => $connection->getTableName('info_block')]);
+$infoData = $connection->fetchAll($select);
+?>
+
+<div class="info-block">
+<!--    <h2>Info Block Data</h2>-->
+    <table>
+        <tbody>
+        <?php foreach ($infoData as $data): ?>
+            <tr>
+                <td><?php echo $data['info_id']; ?></td>
+                <td><?php echo $data['title']; ?></td>
+                <td><?php echo $data['short_description']; ?></td>
+                <td><?php echo $data['priority']; ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
